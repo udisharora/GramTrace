@@ -1,0 +1,29 @@
+<!-- templates/gallery.html -->
+{% extends "base.html" %}
+{% block title %}Gallery - Instagram Scraper{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <h2 class="text-center mb-4">🖼️ Gallery for <span class="text-info">{{ username }}</span></h2>
+
+  <div class="download-btn">
+  <a href="{{ url_for('download_file', user=session['user'], scrape_name=username, filename='image_summary.xlsx') }}" class="btn btn-outline-light btn-sm">
+    ⬇️ Download Excel
+  </a>
+</div>
+
+
+  <div class="row">
+    {% for image, description in combined %}
+      <div class="col-md-4 mb-4">
+        <div class="card bg-dark text-white shadow">
+          <img src="{{ image }}" class="card-img-top" alt="Image">
+          <div class="card-body">
+            <p class="card-text">{{ description.split('Description:')[-1] }}</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
