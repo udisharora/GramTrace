@@ -1,0 +1,17 @@
+<!-- templates/history.html -->
+{% extends "base.html" %}
+{% block title %}History - Instagram Scraper{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <h2 class="text-center mb-4">📜 Scrape History</h2>
+  <ul class="list-group mx-auto" style="max-width: 500px;">
+    {% for user in usernames %}
+      <li class="list-group-item bg-dark text-white d-flex justify-content-between align-items-center">
+        {{ user }}
+        <a href="{{ url_for('gallery', username=user) }}" class="btn btn-outline-light btn-sm">View</a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

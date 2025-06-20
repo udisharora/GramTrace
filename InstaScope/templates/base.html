@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Instagram Scraper{% endblock %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #121212;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .btn-success {
+      background-color: #1db954;
+      border: none;
+    }
+
+    .btn-outline-light {
+      border-color: #ffffff;
+      color: #ffffff;
+    }
+
+    .btn-outline-light:hover {
+      background-color: #ffffff;
+      color: #121212;
+    }
+
+    .btn-danger {
+      border: none;
+      background-color: #ff4c4c;
+    }
+
+    .btn-danger:hover {
+      background-color: #ff1a1a;
+    }
+
+    .loader {
+      display: none;
+      margin: 20px auto;
+      border: 5px solid #2c2c2c;
+      border-top: 5px solid #1db954;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .top-buttons {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      display: flex;
+      gap: 0.5rem;
+      z-index: 1000;
+    }
+
+    .profile-buttons {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      z-index: 1000;
+    }
+
+    .username-text {
+      font-weight: 500;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+
+    .center-box {
+      max-width: 500px;
+      margin: auto;
+      padding: 2rem;
+      background-color: #1e1e1e;
+      border-radius: 1rem;
+      box-shadow: 0 0 15px rgba(0,0,0,0.6);
+    }
+
+    @media (max-width: 768px) {
+      .top-buttons, .profile-buttons {
+        flex-direction: column;
+        align-items: flex-start;
+        position: static;
+        margin: 1rem;
+      }
+
+      .profile-buttons {
+        align-items: flex-end;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top left: Navigation -->
+  <div class="top-buttons">
+    {% if request.endpoint != 'index' %}
+      <a href="{{ request.referrer or url_for('index') }}" class="btn btn-outline-light btn-sm">← Back</a>
+      <a href="{{ url_for('scrape_page') }}" class="btn btn-outline-light btn-sm">+ New Scrape</a>
+      <a href="{{ url_for('history') }}" class="btn btn-outline-light btn-sm">📜 History</a>
+    {% endif %}
+  </div>
+
+  <!-- Top right: Profile info -->
+  <div class="profile-buttons">
+    {% if session['user'] %}
+      <span class="username-text">👤 {{ session['user'] }}</span>
+      <a href="{{ url_for('logout') }}" class="btn btn-outline-light btn-sm">Logout</a>
+    {% endif %}
+  </div>
+
+  {% block content %}{% endblock %}
+</body>
+</html>
