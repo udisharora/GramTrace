@@ -1,6 +1,0 @@
-Flask
-selenium
-bs4
-requests
-xlsxwriter
-webdriver-manager
