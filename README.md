@@ -19,3 +19,10 @@ A Flask-based web app to scrape public Instagram profile data.
 
 ```bash
 pip install -r requirements.txt
+```
+
+# How to run locally
+```bash
+python app.py
+```
+Then open the local domain and follow the steps on the website
